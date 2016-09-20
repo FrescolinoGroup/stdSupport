@@ -16,7 +16,7 @@ install:
     - cmake ..
     - make
 
-# run tests
+# run test
 script:
     - cd build 
     - make test
