@@ -17,7 +17,7 @@ include(fsc/softinstall)
 include(fsc/uninstall)
 
 # compiler & flags
-set(CMAKE_CXX_COMPILER "g++")
+#~ set(CMAKE_CXX_COMPILER "g++")
 set(CMAKE_CXX_FLAGS "-std=c++14 -O3 -march=native -Werror -Wall -Wextra -Wpedantic")
 #~ set(CMAKE_CXX_COMPILER "clang++")
 #~ set(CMAKE_CXX_FLAGS "-std=c++14 -O3 -march=native -Werror -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-missing-prototypes -Wno-exit-time-destructors -Wno-global-constructors -Wno-implicit-fallthrough -Wno-disabled-macro-expansion -Wno-documentation-unknown-command")
