@@ -1,12 +1,13 @@
 language: cpp
 
-#~ sudo: true
+sudo: true
+
 compiler:
   - clang
   - gcc
 
 before_install:
-  - sudo add-apt-repository ppa:george-edison55/precise-backports -qq
+  - sudo add-apt-repository ppa:george-edison55/precise-backports
   - sudo apt-get update -qq
   - sudo apt-get upgrade cmake -qq
 
