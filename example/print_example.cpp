@@ -25,7 +25,7 @@ int main() {
     m["c"] = 1;
     m["a"] = 1;
     m["b"] = 1;
-    std::cout << map << std::endl; // "{a: 1, b: 1, c: 1}"
+    std::cout << m << std::endl; // "{a: 1, b: 1, c: 1}"
 
     return 0;
 }
