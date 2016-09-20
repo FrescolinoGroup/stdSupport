@@ -18,7 +18,7 @@ matrix:
             - llvm-toolchain-precise-3.7
           packages:
             - clang-3.7
-       env: COMPILER=clang++-3.7
+      env: COMPILER=clang++-3.7
 
 # if you need to install packages before installing
 #~ before_install:
