@@ -9,8 +9,8 @@
  * \copyright  see LICENSE
  ******************************************************************************/
 
-#ifndef _STDSUPPORT_HPP_GUARD
-#define _STDSUPPORT_HPP_GUARD
+#ifndef FSC_STDSUPPORT_HPP_GUARD
+#define FSC_STDSUPPORT_HPP_GUARD
 
 #include <vector>
 #include <map>
@@ -122,4 +122,4 @@ namespace std {
     
 }  // end namespace std
 
-#endif //_STDSUPPORT_HPP_GUARD
+#endif //FSC_STDSUPPORT_HPP_GUARD
