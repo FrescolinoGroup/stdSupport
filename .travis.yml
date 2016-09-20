@@ -1,4 +1,5 @@
 language: cpp
+sudo: false
 
 matrix:
   include:
@@ -26,18 +27,19 @@ matrix:
             - cmake-data
       env: COMPILER=clang++-3.7
 
-# if you need to install packages before installing
-#~ before_install:
-    #~ - sudo apt-get update -qq
-    #~ - sudo apt-get install -qq liblapack.so 
-
 install:
     - mkdir build
     - cd build
+    # add dependency material (cmake_extensions and catch)
+    - mkdir include
+    - cd include
+    - export INCLUDE=$PWD
     - git clone https://github.com/FrescolinoGroup/cmake_extensions.git
     - wget https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp
-    - export CPLUS_INCLUDE_PATH=$PWD:$CPLUS_INCLUDE_PATH
-    - cmake .. -DCMAKE_MODULE_PATH=$PWD/cmake_extensions -DCMAKE_CXX_COMPILER=$COMPILER
+    - export CPLUS_INCLUDE_PATH=$INCLUDE:$CPLUS_INCLUDE_PATH
+    - cd ..
+    # run cmake and make
+    - cmake .. -DCMAKE_MODULE_PATH=$INCLUDE/cmake_extensions -DCMAKE_CXX_COMPILER=$COMPILER
     - make
 
 # run test
