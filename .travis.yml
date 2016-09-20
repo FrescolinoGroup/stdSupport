@@ -1,24 +1,24 @@
 language: cpp
 
-#~ sudo: true
-
-compiler:
-  - clang
-  - gcc
-
-addons:
-  apt:
-    sources:
-      - george-edison55-precise-backports
-      - llvm-toolchain-precise
-      - ubuntu-toolchain-r-test
-    packages:
-      - cmake
-      - cmake-data
-      - clang-3.7
-      #~ - g++-5
-      #~ - gcc-5
-
+matrix:
+  include:
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      env: COMPILER=g++-5
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.7
+          packages:
+            - clang-3.7
+       env: COMPILER=clang++-3.7
 
 # if you need to install packages before installing
 #~ before_install:
@@ -26,15 +26,12 @@ addons:
     #~ - sudo apt-get install -qq liblapack.so 
 
 install:
-    - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
-    - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.7" CC="clang-3.7"; fi
-    - $CXX --version
     - mkdir build
     - cd build
     - git clone https://github.com/FrescolinoGroup/cmake_extensions.git
     - wget https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp
     - export CPLUS_INCLUDE_PATH=$PWD:$CPLUS_INCLUDE_PATH
-    - cmake .. -DCMAKE_MODULE_PATH=$PWD/cmake_extensions -DCMAKE_CXX_COMPILER=$CXX
+    - cmake .. -DCMAKE_MODULE_PATH=$PWD/cmake_extensions -DCMAKE_CXX_COMPILER=$COMPILER
     - make
 
 # run test
