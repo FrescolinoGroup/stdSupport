@@ -1,15 +1,18 @@
 language: cpp
 
-sudo: true
+#~ sudo: true
 
 compiler:
   - clang
   - gcc
 
-before_install:
-  - sudo add-apt-repository ppa:george-edison55/precise-backports
-  - sudo apt-get update -qq
-  - sudo apt-get upgrade cmake -qq
+addons:
+  apt:
+    sources:
+      - george-edison55-precise-backports
+    packages:
+      - cmake
+      - cmake-data
 
 
 # if you need to install packages before installing
