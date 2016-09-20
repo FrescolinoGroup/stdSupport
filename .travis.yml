@@ -22,8 +22,9 @@ addons:
 
 install:
     - mkdir build
+    - git clone git@github.com:FrescolinoGroup/cmake_extensions.git
     - cd build
-    - cmake ..
+    - cmake .. -DCMAKE_MODULE_PATH=./cmake_extensions
     - make
 
 # run test
