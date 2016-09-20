@@ -5,6 +5,15 @@ compiler:
   - clang
   - gcc
 
+addons:
+    apt:
+        sources:
+            - llvm-toolchain-precise
+            - ubuntu-toolchain-r-test
+        packages:
+            - cmake-3.5
+
+
 # if you need to install packages before installing
 #~ before_install:
     #~ - sudo apt-get update -qq
