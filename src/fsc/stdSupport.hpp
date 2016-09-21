@@ -232,9 +232,9 @@ namespace fsc {
         FSC_STO_IMPL(unsigned long long, stoull)
         
         FSC_STO_SPEC_IMPL(int8_t, int, stoi)
-        FSC_STO_SPEC_IMPL(uint8_t, unsigned long, stoi)
+        FSC_STO_SPEC_IMPL(uint8_t, unsigned long, stol)
         FSC_STO_SPEC_IMPL(int16_t, int, stoi)
-        FSC_STO_SPEC_IMPL(uint16_t, unsigned long, stoi)
+        FSC_STO_SPEC_IMPL(uint16_t, unsigned long, stol)
         FSC_STO_SPEC_IMPL(unsigned int, unsigned long, stol)
         
         template<>
