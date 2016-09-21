@@ -9,3 +9,11 @@ printing. This module adds these support functions.
 #### Printing
 
 \include print_example.cpp 
+
+#### Converting
+
+\include convert_example.cpp
+
+#### Additional helper
+
+\include diverse_example.cpp
