@@ -1,6 +1,6 @@
 /** ****************************************************************************
- * \file        print_example.cpp
- * \brief       Shows the print functions for some containers 
+ * \file        convert_example.cpp
+ * \brief       Shows the fsc::sto<T> capabilities
  * \author
  * Year      | Name
  * --------: | :------------

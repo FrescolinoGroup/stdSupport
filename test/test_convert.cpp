@@ -1,9 +1,10 @@
 /** ****************************************************************************
- * \file    demo_test.cpp
- * \brief   Demonstrates testing with catch
+ * \file    test_convert.cpp
+ * \brief   Testing convert functions
  * \author
  * Year      | Name
  * --------: | :------------
+ * 2016      | Mario S. Koenz
  * 2016      | C.Frescolino
  * \copyright  see LICENSE
  ******************************************************************************/

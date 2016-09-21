@@ -1,6 +1,6 @@
 /** ****************************************************************************
- * \file        print_example.cpp
- * \brief       Shows the print functions for some containers 
+ * \file        diverse_example.cpp
+ * \brief       Shows split & strip function
  * \author
  * Year      | Name
  * --------: | :------------
