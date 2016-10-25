@@ -23,11 +23,11 @@
 #include <iterator>
 #include <stdexcept>
 
-// yes, I know what I'm doing and what namespace this is :P
 /// \brief support functions for the std containers
 /// 
 /// We define functions to help with IO of std containers
-namespace std {
+namespace fsc {
+    //=================== to_string ===================
     /// \cond IMPLEMENTATION_DETAIL_DOC
     namespace detail {
         template<typename T>
@@ -56,6 +56,20 @@ namespace std {
     }//end namespace detail
     /// \endcond
     
+    /// \brief Generic version that can be specialized or overloaded
+    /// (since partial function specialization is not possible). 
+    /// Just forwards to std::to_string
+    /// \param arg: T must support the syntax `std::cout << t`
+    ///  
+    /// Example:
+    /// ~~~{.cpp}
+    /// std::vector<int> vec{1,2,3};
+    /// auto str = to_string(vec);   // str == "[1, 2, 3]"
+    /// ~~~
+    template <typename T>
+    std::string to_string(T const &arg) {
+        return std::to_string(arg);
+    }
     /// \brief Converts a `std::vector<T>` to a `std::string`
     /// \param vec: a `std::vector<T>` where T must support the syntax `std::cout << t`
     ///  
@@ -65,7 +79,7 @@ namespace std {
     /// auto str = to_string(vec);   // str == "[1, 2, 3]"
     /// ~~~
     template <typename T>
-    std::string to_string(std::vector<T> const &vec) noexcept {
+    std::string to_string(std::vector<T> const &vec) {
         return detail::array_to_string_impl(vec);
     }
     /// \brief Converts a `std::array<T, N>` to a `std::string`
@@ -77,7 +91,7 @@ namespace std {
     /// auto str = to_string(arr);   // str == "[1, 2, 3]"
     /// ~~~
     template <typename T, size_t N>
-    std::string to_string(std::array<T, N> const &arr) noexcept {
+    std::string to_string(std::array<T, N> const &arr) {
         return detail::array_to_string_impl(arr);
     }
     /// \brief Converts a `std::map<K, V>` to a `std::string`
@@ -92,45 +106,11 @@ namespace std {
     /// auto str = to_string(m);   // str == "{a: 1, b: 1, c: 1}"
     /// ~~~
     template <typename K, typename V>
-    std::string to_string(std::map<K, V> const &m) noexcept {
+    std::string to_string(std::map<K, V> const &m) {
         return detail::map_to_string_impl(m);
     }
     
-    /// \brief prints a `std::vector<T>`
-    /// \param os: the destination stream
-    /// \param arg: the vector to print
-    ///
-    /// Just uses std::to_string internally.
-    template<typename T>
-    std::ostream & operator<<(std::ostream & os, std::vector<T> const & arg) {
-        os << to_string(arg);
-        return os;
-    }
-    /// \brief prints a `std::array<T, N>`
-    /// \param os: the destination stream
-    /// \param arg: the array to print
-    ///
-    /// Just uses std::to_string internally.
-    template<typename T, size_t N>
-    std::ostream & operator<<(std::ostream & os, std::array<T, N> const & arg) {
-        os << to_string(arg);
-        return os;
-    }
-    /// \brief prints a `std::map<K, V>`
-    /// \param os: the destination stream
-    /// \param arg: the map to print
-    ///
-    /// Just uses std::to_string internally.
-    template<typename K, typename V>
-    std::ostream & operator<<(std::ostream & os, std::map<K, V> const & arg) {
-        os << to_string(arg);
-        return os;
-    }
-    
-}  // end namespace std
-
-/// \brief Additional std extensions are defined here
-namespace fsc {
+    //=================== sto<T> ===================
     // forward declaration
     template<typename T>
     inline T sto(std::string const & text);
@@ -281,8 +261,23 @@ namespace fsc {
     /// 
     /// It is implemented for: `int8_t`, `int16_t`, `int`, `long`, `long long` as well as all unsigned counterparts, for `float`, `double`, `long double`, `std::string` and to `std::vector<T>` where `T` has to have a `sto<T>(std::string)` functionality.
     template<typename T>
-    inline T sto(std::string const & text) {
+    T sto(std::string const & text) {
         return detail::sto_impl<T>::sto(text);
+    }
+    
+    /// \brief Tries to get an element from a map and falls back to a default if it does not exist.
+    /// \returns Eighter the value to the key if it exists, and the default value otherwise.
+    template<typename Key, typename Value>
+    V const & get(std::map<Key, Value> const & m ///< the map we want to get the element from
+                , typename std::map<Key, Value>::key_type const & key ///< the key in question
+                , typename std::map<Key, Value>::mapped_type const & value ///< return this value if the map does not contain the key
+                ) noexcept {
+        // TODO: check if this is actually faster than asking for permission
+        try {
+            return m.at(key);
+        } catch(std::out_of_range) {
+            return value;
+        }
     }
     
     /// \example io_example.cpp
@@ -291,6 +286,38 @@ namespace fsc {
 
     /// \example diverse_example.cpp
 }//end namespace fsc
+
+//=================== global stream ops ===================
+/// \brief prints a `std::vector<T>`
+/// \param os: the destination stream
+/// \param arg: the vector to print
+///
+/// Just uses std::to_string internally.
+template<typename T>
+inline std::ostream & operator<<(std::ostream & os, std::vector<T> const & arg) {
+    os << fsc::to_string(arg);
+    return os;
+}
+/// \brief prints a `std::array<T, N>`
+/// \param os: the destination stream
+/// \param arg: the array to print
+///
+/// Just uses std::to_string internally.
+template<typename T, size_t N>
+inline std::ostream & operator<<(std::ostream & os, std::array<T, N> const & arg) {
+    os << fsc::to_string(arg);
+    return os;
+}
+/// \brief prints a `std::map<K, V>`
+/// \param os: the destination stream
+/// \param arg: the map to print
+///
+/// Just uses std::to_string internally.
+template<typename K, typename V>
+inline std::ostream & operator<<(std::ostream & os, std::map<K, V> const & arg) {
+    os << fsc::to_string(arg);
+    return os;
+}
 
 
 #endif //FSC_STDSUPPORT_HPP_GUARD

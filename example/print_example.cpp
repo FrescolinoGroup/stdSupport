@@ -15,7 +15,7 @@
 int main() {
     
     std::vector<int> vec{1,2,3};
-    auto str1 = to_string(vec);
+    auto str1 = fsc::to_string(vec);
     std::cout << str1 << std::endl; // "[1, 2, 3]"
     
     std::array<int, 3> arr{1,2,3};

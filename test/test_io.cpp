@@ -19,7 +19,7 @@ TEST_CASE("testing to_string", "[std, to_string]") {
     std::string cmp1 = "[1, 2, 3]";
     std::vector<int> vec{1,2,3};
     
-    auto str1 = to_string(vec);
+    auto str1 = fsc::to_string(vec);
     
     CHECK(str1 == cmp1);
     
@@ -27,7 +27,7 @@ TEST_CASE("testing to_string", "[std, to_string]") {
     std::string cmp2 = "[1, 2, 3]";
     std::array<int, 3> arr{1,2,3};
     
-    auto str2 = to_string(arr);
+    auto str2 = fsc::to_string(arr);
     
     CHECK(str2 == cmp2);
     
@@ -37,7 +37,7 @@ TEST_CASE("testing to_string", "[std, to_string]") {
     m["c"] = 1;
     m["a"] = 1;
     m["b"] = 1;
-    auto str3 = to_string(m);
+    auto str3 = fsc::to_string(m);
     
     CHECK(str3 == cmp3);
     

@@ -1,4 +1,7 @@
 
+#define MIB_TAGS main, split_w, split, explode, explode_s
+#define MIB_TEST main, split_w, split, explode, explode_s
+
 #include <fsc/profiler.hpp>
 
 #include <iostream>
@@ -84,9 +87,6 @@ inline std::vector<std::string> explodeSafely(const std::string str,
   return v;
 }
 ////////////////////////////////////////////////////////////////////////////////
-
-MIB_TAGS(main, split_w, split, explode, explode_s)
-MIB_TEST(main, split_w, split, explode, explode_s)
 
 int main() {
 
