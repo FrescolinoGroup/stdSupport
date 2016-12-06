@@ -77,10 +77,11 @@ std::string to_string(T const &arg) {
 /// ~~~{.cpp}
 /// auto str = to_string(std::string("hello"));   // str == "hello"
 /// ~~~
-std::string const &to_string(std::string const &arg) { return arg; }
+inline std::string const &to_string(std::string const &arg) { return arg; }
+
 /// \brief Converts a `std::vector<T>` to a `std::string`
-/// \param vec: a `std::vector<T>` where T must support the syntax
-/// `std::cout << t`
+/// \param vec: a `std::vector<T>` where T must support the syntax `std::cout <<
+/// t`
 ///
 /// Example:
 /// ~~~{.cpp}
@@ -92,8 +93,8 @@ std::string to_string(std::vector<T> const &vec) {
     return detail::array_to_string_impl(vec);
 }
 /// \brief Converts a `std::array<T, N>` to a `std::string`
-/// \param arr: a `std::array<T, N>` where T must support the syntax
-/// `std::cout << t`
+/// \param arr: a `std::array<T, N>` where T must support the syntax `std::cout
+/// << t`
 ///
 /// Example:
 /// ~~~{.cpp}
@@ -259,6 +260,10 @@ namespace detail {
             return res;
         }
     };
+
+#undef FSC_STO_IMPL
+#undef FSC_STO_SPEC_IMPL
+#undef FSC_STO_CHECK_ERROR
 
 #undef FSC_STO_IMPL
 #undef FSC_STO_SPEC_IMPL
