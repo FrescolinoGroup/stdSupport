@@ -79,6 +79,15 @@ std::string to_string(T const &arg) {
 /// ~~~
 inline std::string const &to_string(std::string const &arg) { return arg; }
 
+/// \brief Overloaded version for char*
+/// \param arg: a char* that will be returned as a std::string
+///
+/// Example:
+/// ~~~{.cpp}
+/// auto str = to_string(std::string("hello"));   // str == "hello"
+/// ~~~
+inline std::string to_string(char const *const arg) { return std::string(arg); }
+
 /// \brief Converts a `std::vector<T>` to a `std::string`
 /// \param vec: a `std::vector<T>` where T must support the syntax `std::cout <<
 /// t`
