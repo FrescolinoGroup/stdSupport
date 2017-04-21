@@ -1,6 +1,6 @@
 /** ****************************************************************************
  * \file        print_example.cpp
- * \brief       Shows the print functions for some containers 
+ * \brief       Shows the print functions for some containers
  * \author
  * Year      | Name
  * --------: | :------------
@@ -9,23 +9,23 @@
  * \copyright  see LICENSE
  ******************************************************************************/
 
-#include <iostream>
+#include <array>
 #include <fsc/stdSupport.hpp>
+#include <iostream>
 
 int main() {
-    
-    std::vector<int> vec{1,2,3};
+    std::vector<int> vec{1, 2, 3};
     auto str1 = fsc::to_string(vec);
-    std::cout << str1 << std::endl; // "[1, 2, 3]"
-    
-    std::array<int, 3> arr{1,2,3};
-    std::cout << arr << std::endl; // "[1, 2, 3]"
-    
+    std::cout << str1 << std::endl;  // "[1, 2, 3]"
+
+    std::array<int, 3> arr{1, 2, 3};
+    std::cout << arr << std::endl;  // "[1, 2, 3]"
+
     std::map<std::string, int> m;
     m["c"] = 1;
     m["a"] = 1;
     m["b"] = 1;
-    std::cout << m << std::endl; // "{a: 1, b: 1, c: 1}"
+    std::cout << m << std::endl;  // "{a: 1, b: 1, c: 1}"
 
     return 0;
 }
